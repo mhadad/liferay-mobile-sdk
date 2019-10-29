@@ -24,6 +24,9 @@ import org.json.JSONObject;
 
 public class TokenRequester {
 
+	public static OkHttpClient client = new OkHttpClient();
+
+
 	public TokenRequester(Session session, String tokenUrl, String clientId, String clientSecret, List<String> scopes,
 		Map<String, String> parameters) {
 		this.session = session;
@@ -59,7 +62,7 @@ public class TokenRequester {
 	}
 
 	public Session send(final SessionCallback callback) throws Exception {
-		OkHttpClient client = new OkHttpClient();
+		OkHttpClient client = TokenRequester.client.clone();
 		FormEncodingBuilder formBody = new FormEncodingBuilder();
 		Request.Builder requestBuilder = new Request.Builder().url(tokenUrl);
 

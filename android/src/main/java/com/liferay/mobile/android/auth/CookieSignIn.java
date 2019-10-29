@@ -51,6 +51,8 @@ import okio.Buffer;
  */
 public class CookieSignIn {
 
+	public static OkHttpClient client = new OkHttpClient();
+
 	public static void registerAuthenticatorForServer(
 			String server, Authenticator authenticator) {
 
@@ -252,7 +254,7 @@ public class CookieSignIn {
 		cookieManager = new CookieManager();
 		cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
 
-		OkHttpClient client = new OkHttpClient();
+		OkHttpClient client = CookieSignIn.client.clone();
 
 		Authenticator authenticator = authenticators.get(session.getServer());
 
